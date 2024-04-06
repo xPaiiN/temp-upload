@@ -1,0 +1,28 @@
+# diskover tagcopier default/sample config file
+#
+# default search paths for config
+# macOS: ~/.config/diskover_tagcopier and ~/Library/Application Support/diskover_tagcopier
+# Other Unix: ~/.config/diskover_tagcopier and /etc/diskover_tagcopier
+# Windows: %APPDATA%\diskover_tagcopier where the APPDATA environment variable falls back to %HOME%\AppData\Roaming if undefined
+#
+appName: diskover_tagcopier
+#logLevel: WARN
+#logLevel: DEBUG
+logLevel: INFO
+logToFile: False
+#logToFile: True
+logDirectory: /var/log/diskover/
+# Windows: 
+#logDirectory: C:\Program Files\diskover\logs
+
+# max number of threads used for tag copying
+maxthreads: 4
+# copy file and directory doc tags, set to True to copy or False to not copy
+filetags: True
+directorytags: True
+# a list of tags you want to exclude from copying or [] (empty list) to not exclude any
+excludetags: ['mediainfo-plugin', 'bad-video']
+# a list of autotags you want to exclude when searching for tagged docs
+# to speed up tag copying, add any autotag tags that get applied to each doc during indexing
+# if any tags are matched, the tags from the source index doc are not copied to the target index doc
+excludeautotags: ['autotag', 'archive', 'delete', 'cleanlist']

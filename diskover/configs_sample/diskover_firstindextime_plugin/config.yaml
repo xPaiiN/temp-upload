@@ -1,0 +1,34 @@
+# diskover firstindextime plugin default/sample config file
+#
+# default search paths for config
+# macOS: ~/.config/diskover_firstindextime_plugin and ~/Library/Application Support/diskover_firstindextime_plugin
+# Other Unix: ~/.config/diskover_firstindextime_plugin and /etc/diskover_firstindextime_plugin
+# Windows: %APPDATA%\diskover_firstindextime_plugin where the APPDATA environment variable falls back to %HOME%\AppData\Roaming if undefined
+#
+appName: diskover_firstindextime_plugin
+#logLevel: WARN
+#logLevel: DEBUG
+logLevel: INFO
+logToFile: False
+#logToFile: True
+logDirectory: /var/log/diskover/
+# Windows: 
+#logDirectory: C:\Program Files\diskover\logs
+
+# verbose logging, set to True or False
+verbose: False
+# cache directory to store cache db (sqlite3)
+# can be set to absolute or relative path (relative to where diskover.py is run)
+#cachedir: __diskover_firstindextime_plugin_cache__/
+cachedir: /opt/diskover/__diskover_firstindextime_plugin_cache__/
+# Windows: 
+#cachedir: C:\Program Files\diskover\__diskover_firstindextime_plugin_cache__
+# cached item's expiry time in seconds or set to 0 to never expire
+#cacheexpiretime: 3600
+cacheexpiretime: 0
+# directory paths to exclude, use [] to not exclude any
+# to exclude all sub directories and files (recursive), use * (wildcard) at end of path
+excludedirs: []
+# directory paths to include, use [] to include all
+# to indclude all sub directories and files (recursive), use * (wildcard) at end of path
+includedirs: []

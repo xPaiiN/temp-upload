@@ -1,0 +1,20 @@
+# diskover Azure alt scanner config file
+# copy to ~/.config/diskover_scandir_azure/ on Linux
+# '~/Application Support/diskover_scandir_azure/' on macOS
+# %APPDATA%/diskover_scandir_azure/ on Windows
+appName: diskover_scandir_azure
+
+# Auth method to Azure, can be connectionstring or credentials
+authmethod: connectionstring
+#authmethod: credentials
+# Azure connection string, can be overwritten with env var AZURE_STORAGE_CONNECTION_STRING
+connectionstring: 
+# when using authmethod credentials, the below four config settings are required
+# Azure account storage blob url
+storagebloburl: 
+# Azure client id
+clientid: 
+# Azure tenant id
+tenantid: 
+# Azure client secret
+clientsecret: 

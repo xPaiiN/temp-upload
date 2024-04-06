@@ -1,0 +1,104 @@
+# diskover autoclean default/sample config file
+#
+# default search paths for config
+# macOS: ~/.config/diskover_autoclean and ~/Library/Application Support/diskover_autoclean
+# Other Unix: ~/.config/diskover_autoclean and /etc/diskover_autoclean
+# Windows: %APPDATA%\diskover_autoclean where the APPDATA environment variable falls back to %HOME%\AppData\Roaming if undefined
+#
+appName: diskover_autoclean
+#logLevel: WARN
+#logLevel: DEBUG
+logLevel: INFO
+#logToFile: False
+logToFile: True
+logDirectory: /var/log/diskover/
+# Windows: 
+#logDirectory: C:\Program Files\diskover\logs
+
+# max number of threads used for autocleaning
+maxthreads: 8
+# autoclean rules
+#
+# query
+# search queries to use when searching for file or directory docs for auto-cleaning
+#
+# action
+# actions are rename, move, copy, delete, and custom. Custom requires customcmd.
+#
+# customcnd
+# when usting custom action, command to use for action
+# set to command you want to run on the file/directory. Use full absolute command path if not in PATH
+# file/directory path is passed as an arg to customcmd, could be a bash or python script, etc
+#
+# renametext
+# if using rename fileaction, what to append to file/directory name, default is .DISKOVER_AUTOCLEAN
+# example a file named somefile.txt would be renamed to somefile.txt.DISKOVER_AUTOCLEAN
+# example a folder named somedir would be renamed to somedir.DISKOVER_AUTOCLEAN
+#
+# movedir
+# if using move fileaction, what directory do you want to move the file/directory into, default is ./.DISKOVER_AUTOCLEAN
+# both relative and absolute paths can be used, for relative start path with ./ and for absolute start with /
+# preserving the source's full path when moving can be set below with movePreservePath
+# example if using relative path ./.DISKOVER_AUTOCLEAN, a file /somefolder/somefile.txt would be moved into /somefolder/.DISKOVER_AUTOCLEAN/somefile.txt
+# example if using relative path ./.DISKOVER_AUTOCLEAN, a folder named /somefolder/otherfolder would be moved into /somefolder/.DISKOVER_AUTOCLEAN/otherfolder
+# example if using absolute path /tmp/DISKOVER_AUTOCLEAN, a file /somefolder/somefile.txt would be moved into /tmp/DISKOVER_AUTOCLEAN/somefolder/somefile.txt
+# example if using absolute paths /tmp/DISKOVER_AUTOCLEAN, a folder named /somefolder/otherfolder would be moved into /tmp/DISKOVER_AUTOCLEAN/somefolder/otherfolder
+#
+# copydir
+# if using copy fileaction, what directory do you want to copy the file/directory to
+# both relative and absolute paths can be used, for relative start path with ./ and for absolute start with /
+# preserving the source's full path when copying can be set below with copyPreservePath
+# see movedir above for examples
+#
+# checktimes
+# list of ctime and/or mtime to check if they have been changed from index doc times, if they are different from index doc times, skip file/directory
+# if you want to not check times, set checktimes to empty list [], default is ['ctime', 'mtime']
+#
+# tags
+# list of tags you want to add to index doc after it has completed the action
+# for no tags set tags to empty list []
+#
+# dirs: 
+# files: 
+dirs: [
+        {
+        'query': 'tags:(expired AND approved_delete)',
+        'action': 'rename',
+        'customcmd': '',
+        'renametext': '.DISKOVER_AUTOCLEAN',
+        'movedir': './.DISKOVER_AUTOCLEAN',
+        'copydir': '/tmp/.DISKOVER_AUTOCLEAN',
+        'checktimes': ['ctime', 'mtime'],
+        'tags': ['autocleaned']
+        }
+    ]
+files: [
+        {
+        'query': 'tags:(expired AND approved_delete)',
+        'action': 'rename',
+        'customcmd': '',
+        'renametext': '.DISKOVER_AUTOCLEAN',
+        'movedir': './.DISKOVER_AUTOCLEAN',
+        'copydir': '/tmp/.DISKOVER_AUTOCLEAN',
+        'checktimes': ['ctime', 'mtime'],
+        'tags': ['autocleaned']
+        }
+    ]
+# delete directories recursively (deleting folder and everything including sub-folders) or just delete files in directory without recursion
+# set to False to not recursively delete or True to recursively delete
+# setting to True is dangerous (like rm -rf) since there is no check done for each file/sub-folder in the directory, the whole directory tree is removed
+deleteDirsRecursive: False
+# replace paths when running file actions
+replacepaths:
+    # translate path names set to True to enable or False to disable.
+    replace: False
+    #from: /
+    #to:  /mnt/
+    from:
+    to:
+# preserve source's full path when moving a directory or file when using move action
+# set to True to preserve or False to not preserve (similar to mv command on Linux)
+movePreservePath: True
+# preserve source's full path when copying a directory or file when using copy action
+# set to True to preserve or False to not preserve (similar to cp command on Linux)
+copyPreservePath: True

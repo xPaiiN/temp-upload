@@ -1,0 +1,41 @@
+# diskover windows attributes default/sample config file
+#
+# default search paths for config
+# Windows: %APPDATA%\diskover_winattrib where the APPDATA environment variable falls back to %HOME%\AppData\Roaming if undefined
+#
+appName: diskover_winattrib
+#logLevel: WARN
+#logLevel: DEBUG
+logLevel: INFO
+logToFile: False
+#logToFile: True
+logDirectory: C:\Program Files\diskover\logs
+
+# max number of threads for processing windows attributes, leave empty/blank to auto-set based on number of cpu cores
+maxthreads:
+#maxthreads: 8
+# include domain in owner/group names, set to True or False
+incdomain: False
+# get Windows primary group, set to True or False
+getgroup: False
+# store sid if owner/group lookup returns None, set to True or False
+usesid: True
+# get Windows Dacl's, set to True or False
+getdacls: True
+# cache directory to store cache db (sqlite3)
+# can be set to absolute or relative path (relative to where this plugin is run)
+#cachedir: __diskover_winattrib_cache__/
+cachedir: C:\Program Files\diskover\__diskover_winattrib_cache__
+# cached item's expiry time in seconds or set to 0 to never expire
+#cacheexpiretime: 3600
+cacheexpiretime: 0
+# which es index type field to get win attrib for, set to True or False
+file: True
+directory: True
+# other text to add to search query when finding files/directores in index to get owner/group/dacl info for, will be AND'd to query string
+otherquery: 
+#otherquery: mtime:{* TO now/m-3M/d}
+# translate path names from index path to Windows path
+replacepaths:
+    from: /C_drive/
+    to:  C:/

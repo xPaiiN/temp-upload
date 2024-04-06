@@ -1,0 +1,53 @@
+# diskover illegal file name default/sample config file
+#
+# default search paths for config
+# macOS: ~/.config/diskover_illegalfilename and ~/Library/Application Support/diskover_illegalfilename
+# Other Unix: ~/.config/diskover_illegalfilename and /etc/diskover_illegalfilename
+# Windows: %APPDATA%\diskover_illegalfilename where the APPDATA environment variable falls back to %HOME%\AppData\Roaming if undefined
+#
+appName: diskover_illegalfilename
+#logLevel: WARN
+#logLevel: DEBUG
+logLevel: INFO
+logToFile: False
+#logToFile: True
+logDirectory: /var/log/diskover/
+# Windows: 
+#logDirectory: C:\Program Files\diskover\logs
+
+# max number of threads used for file tagging/fixing
+maxthreads: 4
+# list of valid file name characters
+# all ascii letters and numbers are added as valid characters by default
+# python re.search is used to check for characters which are not valid
+# special characters need to be escaped with \ (backslash)
+validchars: ['\-', '_', '\.', '\(', '\)']
+# check file and/or directory docs for illegal file names, set to True or False
+checkfile: True
+checkdirectory: True
+# check for file names over n characters, set to True or False
+checklongnames: True
+# minimum number of characters to be considered long file name
+longnameminchars: 32
+# a list of file extensions you want to check for illegal file names or [] (empty list) for any extension
+#extensions: ['png', 'doc', 'pdf']
+extensions: []
+# a list of absolute directory paths to exclude from searching or [] for no exclusions
+#excludedirs: ['/stor1/dir1']
+excludedirs: []
+# tag you want to add for any illegal file names
+illegaltag: illegalname
+# tag you want to add for any long file names
+longtag: longname
+# fixnames cli option settings
+# validchars setting is used as file rename whitelist
+# normalize unicode when sanitizing file names, set to True or False
+normalizeunicode: True
+# encode file name to ascii when sanitizing file names 
+# requires normalizeunicode set to True, set to True or False
+encodeascii: False
+# file name character limit, any file name over this character limit will be truncated
+filenamecharlimit: 255
+# replace spaces in file name with _ (underscore), set to True or False
+# if this is set to False and there is no space character in validchars setting, all spaces will be removed 
+replacespaces: True

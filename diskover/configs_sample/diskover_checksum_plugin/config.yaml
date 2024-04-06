@@ -1,0 +1,55 @@
+# diskover checksum crawl plugin default/sample config file
+#
+# default search paths for config
+# macOS: ~/.config/diskover_checksum_plugin and ~/Library/Application Support/diskover_checksum_plugin
+# Other Unix: ~/.config/diskover_checksum_plugin and /etc/diskover_checksum_plugin
+# Windows: %APPDATA%\diskover_checksum_plugin where the APPDATA environment variable falls back to %HOME%\AppData\Roaming if undefined
+#
+appName: diskover_checksum_plugin
+#logLevel: WARN
+#logLevel: DEBUG
+logLevel: INFO
+logToFile: False
+#logToFile: True
+logDirectory: /var/log/diskover/
+# Windows: 
+#logDirectory: C:\Program Files\diskover\logs
+
+# verbose logging, set to True or False
+verbose: False
+# which hash/checksum type to use
+# hash modes: xxhash (requires xxhash Python module), md5, sha1, or sha256
+# checksums are stored in the hash field: hash.xxhash, hash.md5, hash.sha1, hash.256
+mode: xxhash
+# block size (in bytes) used for reading file when generating hash
+# increasing this to for example 1 MB or setting to same as rsize nfs mount option can improve performance for large files
+blocksize: 65536
+# cache directory to store cache db (sqlite3)
+# can be set to absolute or relative path (relative to where diskover.py is run)
+#cachedir: __checksum_plugin_cache__/
+cachedir: /opt/diskover/__checksum_plugin_cache__/
+# Windows: 
+#cachedir: C:\Program Files\diskover\__checksum_plugin_cache__
+# cached item's expiry time in seconds or set to 0 to never expire
+#cacheexpiretime: 3600
+cacheexpiretime: 0
+# min size of file to hash (in bytes)
+minsize: 1024
+# max size of file to hash (in bytes)
+maxsize: 1073741824
+# file types (extensions) to hash, use [] for any file types
+extensions: ['doc', 'docx', 'txt', 'pdf', 'png', 'jpg', 'gif']
+#extensions: []
+# file types (extensions) to exclude from hashing, use [] to not exclude any
+excludeextensions: []
+# directory names and absolute paths you want to exclude from hashing files in
+# directory excludes uses python re.search for string search (regex)
+# directory excludes are case-sensitive
+# Examples: backup or backup* or /dir/dirname
+# to exclude none use empty list []
+#excludedirs: ["/mnt/stor1/somefolder1", "/mnt/stor2/somefolder2"]
+excludedirs: []
+# restore atime and mtime after hashing files, set to True or False, default False
+# if your file system exports/shares are read-only, you can leave this as False as setting to True
+# will cause many log warnings about not being able to set times
+restoretimes: False

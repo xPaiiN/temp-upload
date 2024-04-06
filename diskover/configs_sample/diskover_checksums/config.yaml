@@ -1,0 +1,71 @@
+# diskover checksums post-index plugin default/sample config file
+#
+# default search paths for config
+# macOS: ~/.config/diskover_checksums and ~/Library/Application Support/diskover_checksums
+# Other Unix: ~/.config/diskover_checksums and /etc/diskover_checksums
+# Windows: %APPDATA%\diskover_checksums where the APPDATA environment variable falls back to %HOME%\AppData\Roaming if undefined
+#
+appName: diskover_checksums
+#logLevel: WARN
+#logLevel: DEBUG
+logLevel: INFO
+logToFile: False
+#logToFile: True
+logDirectory: /var/log/diskover/
+# Windows: 
+#logDirectory: C:\Program Files\diskover\logs
+
+# max number of threads for file hashing, leave empty/blank to auto-set based on number of cpu cores
+maxthreads: 
+#maxthreads: 8
+# which hash/checksum type to use, config setting can be overwritten with --hashmode cli option
+# hash modes: xxhash (requires xxhash Python module), md5, sha1, or sha256
+# checksums are stored in the hash field: hash.xxhash, hash.md5, hash.sha1, hash.256
+mode: xxhash
+# block size (in bytes) used for reading file when generating hash
+# increasing this to for example 1 MB or setting to same as rsize nfs mount option can improve performance for large files
+blocksize: 65536
+# cache directory to store cache db (sqlite3)
+# can be set to absolute or relative path (relative to where diskover-checksums.py is run)
+#cachedir: __diskover_hash_cache__/
+cachedir: /opt/diskover/plugins_postindex/__diskover_hash_cache__/
+# Windows: 
+#cachedir: C:\Program Files\diskover\__diskover_hash_cache__
+# cached item's expiry time in seconds or set to 0 to never expire
+#cacheexpiretime: 3600
+cacheexpiretime: 0
+# min size of file to hash (in bytes)
+minsize: 1024
+# max size of file to hash (in bytes)
+maxsize: 1073741824
+# file types (extensions) to hash, use [] for any file types
+extensions: ['doc', 'docx', 'txt', 'pdf', 'png', 'jpg', 'gif']
+#extensions: []
+# file types (extensions) to exclude from hashing, use [] to not exclude any
+excludeextensions: []
+# file names to exclude from hashing, use [] to not exclude any
+excludefiles: []
+# directory paths to exclude from hashing, use [] to not exclude any
+# to exclude all sub directories and files (recursive), use * (wildcard) at end of path
+excludedirs: []
+# include hardlinks when searching for files
+hardlinks: False
+# other search query string to add to search query when finding files to hash, will be AND'd to query string
+otherquery: 
+#otherquery: mtime:{* TO now/m-3M/d}
+# restore atime and mtime after hashing files, set to True or False, default False
+# if your file system exports/shares are read-only, you can leave this as False as setting to True
+# will cause many log warnings about not being able to set times
+restoretimes: False
+replacepaths:
+    # translate path names set to True to enable or False to disable.
+    replace: False
+    #from: /
+    #to:  /mnt/
+    from:
+    to:
+# use file mtime (modified time) on disk instead of using mtime in ES index doc when comparing mtime in cache
+# set to True to get and use file mtime on disk, or False to use mtime in index doc
+usediskmtime: False
+# directory to save csv files when using csv cli option
+csvdir: /tmp
