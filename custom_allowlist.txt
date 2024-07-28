@@ -1,0 +1,11 @@
+# custom allowlist
+s.click.aliexpress.com
+clkde.tradedoubler.com
+analytics.twitter.com
+trace.svc.ui.com
+app.adjust.com
+app.adjust.world
+app.adjust.net.in
+t.adcell.com
+wl.spotify.com
+www.jdoqocy.com
